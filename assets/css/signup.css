@@ -1,0 +1,340 @@
+/* General Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    /* Color Variables */
+    --background-dark: #67627A;
+    --container-bg: #2E2A42;
+    --input-color: #666178;
+    --left-bg: #2c2835;
+    --right-bg: #2c2835;
+    --primary-color: #6E54B5;
+    --secondary-color: #858290;
+    --trio-color: #B49FE7;
+    --quadro-color: #9e99ab;
+    --hover-color: #8466f0;
+    --button-color: #4e4d4f;
+    --button-bg: #3B364C;
+    --input-field: #3B364C;
+    --text-white: #fff;
+    --text-shadow: rgba(0, 0, 0, 0.7);
+    --transparent-white: rgba(255, 255, 255, 0.4); /* Transparent white */
+    --transparent-trio-color: rgba(180, 159, 231, 0.4); /* Transparent trio color */
+
+    /* Font Variables */
+    --main-font: "Mulish", sans-serif;
+    --heading-font: "Mulish", sans-serif;
+    --body-font: "Mulish", sans-serif;
+    --button-font: "Mulish", sans-serif;
+    --font-light: 100;
+    --font-regular: 350;
+    --font-bold: 350;
+
+    /* Font Sizes */
+    --font-size-small: 12px;
+    --font-size-medium: 14px;
+    --font-size-large: 16px;
+    --font-size-h2: 28px;
+    --font-size-h2-large: 35px;
+
+    /* Font Weights */
+    --font-weight-light: 100;
+    --font-weight-regular: 350;
+    --font-weight-bold: 350;
+}
+
+body {
+    font-family: var(--main-font);
+    background-color: var(--background-dark);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    padding: 0 20px;
+}
+
+/* Container Styling */
+.container {
+    display: flex;
+    width: 950px;
+    height: 550px;
+    background-color: var(--container-bg);
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.25);
+}
+
+/* Left Section Styling */
+.left-section {
+    flex: 1;
+    position: relative;
+    background-color: var(--left-bg);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 20px;
+    z-index: 1; /* Ensure it's above the background image */
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+    z-index: 3; /* Bring the header above the background image */
+}
+
+.logo {
+    width: 45%;
+    height: 80%;
+    margin-left: -20px;
+    z-index: 3; /* Ensure the logo is above the background image */
+    filter: drop-shadow(2px 2px 3px rgba(0, 0, 0, 0.7)); /* Add shadow for better visibility */
+}
+
+.back-button {
+    font-family: var(--button-font);
+    font-weight: var(--font-weight-regular);
+    background: var(--button-bg);
+    color: var(--text-white);
+    border: none;
+    border-radius: 20px;
+    padding: 10px 20px;
+    cursor: pointer;
+    transition: background 0.3s;
+    z-index: 3; /* Ensure the button is clickable above the background image */
+}
+
+.back-button:hover {
+    background: var(--transparent-white);
+}
+
+.background-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 0; /* Ensure the background is below other elements */
+    opacity: 0.7;
+    filter: brightness(0.8);
+}
+
+
+.content {
+    z-index: 0;
+    color: var(--text-white);
+    text-shadow: 0 2px 10px var(--text-shadow);
+    
+}
+
+.content h2 {
+    font-family: var(--heading-font);
+    font-weight: var(--font-weight-bold);
+    font-size: var(--font-size-h2);
+    position: relative;
+}
+
+/* Right Section Styling */
+.right-section {
+    flex: 1;
+    padding: 50px 40px;
+    background-color: var(--right-bg);
+}
+
+.form-container {
+    font-family: var(--body-font);
+    color: var(--text-white);
+}
+
+.form-container h2 {
+    font-family: var(--heading-font);
+    font-weight: var(--font-weight-bold);
+    font-size: var(--font-size-h2-large);
+    margin-bottom: 10px;
+}
+
+.form-container p {
+    margin-bottom: 20px;
+    color: var(--quadro-color);
+    font-size: var(--font-size-medium);
+    font-weight: var(--font-weight-light);
+}
+
+.form-container a {
+    color: var(--trio-color);
+}
+
+.form-container a:hover {
+    text-decoration: underline;
+}
+
+.input-container {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 15px;
+    position: relative;
+}
+
+.input-field {
+    padding: 12px;
+    font-family: var(--body-font);
+    font-weight: var(--font-weight-regular);
+    border: 1px solid var(--container-bg);
+    border-radius: 5px;
+    width: 48%;
+    background-color: var(--input-field);
+    color: var(--text-white);
+}
+
+.input-field.full-width {
+    width: 100%;
+    margin-bottom: 15px;
+    padding-right: 40px;
+}
+
+.input-field:focus {
+    border-color: var(--trio-color);
+    outline: none; 
+}
+
+.eye-icon {
+    position: absolute;
+    right: 15px;
+    top: 40%;
+    transform: translateY(-50%);
+    cursor: pointer;
+    width: 24px;
+    height: 24px;
+}
+
+.eye-icon:hover {
+    opacity: 1;
+}
+
+/* Hide the default checkbox */
+.custom-checkbox {
+    display: none;
+}
+
+/* Style the label to act as a custom checkbox */
+.checkbox-container label {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    font-size: var(--font-size-small);
+    color: var(--text-white);
+    cursor: pointer;
+    margin-bottom: 15px;
+}
+
+/* Create a smaller custom checkbox */
+.checkbox-container label::before {
+    content: "";
+    display: inline-block;
+    width: 14px; /* Smaller checkbox size */
+    height: 14px; /* Smaller checkbox size */
+    background-color: white; /* Checkbox background color */
+    border: 1px solid var(--right-bg);
+    border-radius: 3px;
+    margin-right: 10px;
+    position: relative;
+}
+
+/* Show checkmark when checked */
+.custom-checkbox:checked + label::before {
+    background-color: white; /* Keep the background color white */
+    border: 1px solid var(--right-bg);
+}
+
+/* Add simple checkmark when checkbox is checked */
+.custom-checkbox:checked + label::after {
+    content: "✓"; /* Simple checkmark */
+    position: absolute;
+    top: 50%; /* Center vertically */
+    left: 4%; /* Center horizontally */
+    transform: translate(-50%, -50%); /* Center the checkmark */
+    font-size: 16px; /* Adjust size of the checkmark to fit the smaller checkbox */
+    color: var(--right-bg); /* Color of the checkmark */
+}
+
+.submit-button {
+    width: 100%;
+    padding: 12px;
+    font-family: var(--button-font);
+    font-weight: var(--font-weight-bold);
+    background-color: var(--primary-color);
+    border: none;
+    color: var(--text-white);
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: var(--font-size-large);
+    transition: background-color 0.3s;
+}
+
+.submit-button:hover {
+    background-color: var(--hover-color);
+}
+
+.divider {
+    text-align: center;
+    font-size: var(--font-size-medium);
+    margin: 20px 0;
+    color: var(--input-color);
+    position: relative;
+}
+
+.divider::before,
+.divider::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    width: 34%;
+    height: 1px;
+    background-color: var(--input-color);
+}
+
+.divider::before {
+    left: 0;
+}
+
+.divider::after {
+    right: 0;
+}
+
+/* Social Login Buttons */
+.social-login {
+    display: flex;
+    justify-content: space-between;
+}
+
+.google-btn, .apple-btn {
+    width: 48%;
+    padding: 12px;
+    font-family: var(--button-font);
+    background-color: var(--left-bg);
+    color: var(--text-white);
+    border: 2px solid var(--button-color);
+    border-radius: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    transition: background-color 0.3s, border-color 0.3s;
+}
+
+.google-btn:hover, .apple-btn:hover {
+    background-color: var(--transparent-trio-color);
+    border-color: var(--transparent-trio-color);
+}
+
+.google-btn img, .apple-btn img {
+    margin-right: 10px;
+    width: 20px;
+    height: 20px;
+}
