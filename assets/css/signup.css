@@ -120,9 +120,10 @@ body {
     position: absolute;
     top: 0;
     left: 0;
-    z-index: 0; /* Ensure the background is below other elements */
+    z-index: 0;
     opacity: 0.7;
     filter: brightness(0.8);
+    transition: opacity 1s ease-in-out; /* Smooth transition for opacity */
 }
 
 
@@ -262,6 +263,11 @@ body {
     font-size: 16px; /* Adjust size of the checkmark to fit the smaller checkbox */
     color: var(--right-bg); /* Color of the checkmark */
 }
+
+.terms-link {
+    margin-left: 5px; /* Adjust the value as needed */
+}
+
 
 .submit-button {
     width: 100%;

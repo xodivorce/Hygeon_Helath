@@ -18,7 +18,7 @@
                 <button class="back-button">Back to website &rarr;</button>
             </div>
             <div class="content">
-                <img src="assets/images/dna.jpg" alt="Background Image" class="background-img">
+            <img id="background-image" src="assets/images/dna.jpg" alt="Background Image" class="background-img">
                 <h2>Capturing Moments,<br>One Life at a Time</h2>
             </div>
         </div>
@@ -44,7 +44,7 @@
                     
                     <div class="checkbox-container">
                         <input type="checkbox" id="agree" class="custom-checkbox">
-                        <label for="agree">I agree to the <a href="#">Terms & Conditions</a></label>
+                        <label for="agree">I agree to the <a href="#" class="terms-link">Terms & Conditions</a></label>
                     </div>
 
 
