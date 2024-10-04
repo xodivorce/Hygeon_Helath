@@ -15,7 +15,7 @@
         <div class="left-section">
             <div class="header">
                 <img src="assets/images/hygeon_heath.svg" alt="Hygeon_heath Logo" class="logo">
-                <button class="back-button">Back to website &rarr;</button>
+                <button class="back-button" onclick="window.location.href='home.php';">Back to website &rarr;</button>
             </div>
             <div class="content">
                 <img id="background-image" src="assets/images/dna.jpg" alt="Background Image" class="background-img">
@@ -43,7 +43,7 @@
                             <input type="checkbox" id="remember-me" class="custom-checkbox">
                             <label for="remember-me">Remember me for 30 days.</label>
                         </div>
-                        <a href="#" class="forgot-password-link">Forgot password?</a>
+                        <a href="fogot_pass_step_one.php" class="forgot-password-link">Forgot password?</a>
                     </div>
                     <!-- Beta Notice -->
                      <p class="beta-notice">

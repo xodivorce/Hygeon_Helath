@@ -15,7 +15,7 @@
         <div class="left-section">
             <div class="header">
                 <img src="assets/images/hygeon_heath.svg" alt="Hygeon_heath Logo" class="logo">
-                <button class="back-button">Back to website &rarr;</button>
+                <button class="back-button" onclick="window.location.href='home.php';">Back to website &rarr;</button>
             </div>
             <div class="content">
             <img id="background-image" src="assets/images/dna.jpg" alt="Background Image" class="background-img">

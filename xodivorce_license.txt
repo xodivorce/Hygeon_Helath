@@ -1,0 +1,34 @@
+xodivorce License Agreement
+===========================
+
+This project and its content are owned by Prasid (hereafter referred to as "Owner"). By accessing or contributing to this project, you agree to comply with the following terms and conditions:
+
+1. Contributions
+   --------------
+   - You are welcome to contribute to this project. Contributions can include code, documentation, or any other forms of input.
+   - All contributions are subject to review and approval by the Owner before being included in the project.
+
+2. Use of Content
+   ---------------
+   - You may view, download, and print content from this project for personal, non-commercial use only.
+   - Explicit permission from the Owner is required before using any elements, code, or other content from the project for any purpose.
+
+3. Attribution
+   ------------
+   - You must give appropriate credit to the Owner, provide a link to the license, and indicate if changes were made.
+
+4. No Derivative Works
+   --------------------
+   - You may not distribute modified versions of the content without prior written permission from the Owner.
+
+5. Requesting Permission
+   ----------------------
+   - To request permission to use any content from this project, email the Owner at [hey@xodivorce.in].
+
+6. Copyright Infringement
+   -----------------------
+   - Unauthorized use of the content may result in a copyright strike and legal action.
+
+Prasid
+© 2024 - xodivorce.in
+
