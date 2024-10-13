@@ -1,3 +1,7 @@
+<?php
+header("Content-Type: text/html; charset=UTF-8");
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -22,7 +26,7 @@
         </ul>
     </div>
     <section class="showcase">
-        <video src="assets/videous/purple.mp4" muted loop autoplay></video>
+        <video src="assets/videous/purple.mp4" muted loop autoplay playsinline preload="auto"></video>
         <div class="overlay"></div>
         <div class="text">
             <h2>Your Care, Our Schedule</h2>
@@ -32,10 +36,9 @@
         <ul class="social">
             <li><a href="https://www.facebook.com/xodivorce.1"><img src="https://i.ibb.co/x7P24fL/facebook.png" alt="Facebook"></a></li>
             <li><a href="https://twitter.com/xodivorce1"><img src="https://i.ibb.co/Wnxq2Nq/twitter.png" alt="Twitter"></a></li>
-            <li><a href="https://www.instagram.com/xodivorce"><img src="https://i.ibb.co/ySwtH4B/instagram.png" alt="Instagram" style="margin-left: -15px;""></a></li>
+            <li><a href="https://www.instagram.com/xodivorce"><img src="https://i.ibb.co/ySwtH4B/instagram.png" alt="Instagram" style="margin-left: -15px;"></a></li>
         </ul>
     </section>
-    </div>
     <script type="text/javascript" src="./assets/js/home.js"></script>
 </body>
 </html>
