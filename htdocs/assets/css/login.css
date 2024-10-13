@@ -7,7 +7,7 @@
 
 :root {
     /* Color Variables */
-    --background-dark: #67627A;
+    --background-color:#121212;
     --container-bg: #2E2A42;
     --input-color: #666178;
     --left-bg: #2c2835;
@@ -46,7 +46,7 @@
 
 body {
     font-family: var(--main-font);
-    background-color: var(--background-dark);
+    background-color:var(--background-color);
     display: flex;
     justify-content: center;
     align-items: center;

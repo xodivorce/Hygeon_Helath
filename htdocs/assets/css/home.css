@@ -1,0 +1,258 @@
+@import url("https://fonts.googleapis.com/css?family=Poppins:200,300,400,500,600,700,800,900&display=swap");
+
+:root {
+  --primary-color: #B49FE7; /* Root color */
+  --secondary-color: #111;  /* Secondary color */
+  --text-color: #ffffffdb;    /* Text color */
+  --menu-color: #f0f8ffcb;
+  --menuhover-color: #B49FE7;
+  --font-family: "Poppins", sans-serif; /* Font family */
+  --font-size-base: 16px;   /* Base font size */
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: var(--font-family);
+  font-size: var(--font-size-base);
+}
+
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  cursor: url('assets/cursor/cursor3.png'), auto;
+  background-color: var(--secondary-color);
+  background-position: center;
+  background-size: cover;
+}
+
+header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: calc(100% - 40px);
+  padding: 20px;
+  background: transparent;
+  display: flex;
+  justify-content: fl;
+  align-items: center;
+  z-index: 99;
+}
+
+button {
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
+  outline: none;
+  border: none;
+  background: var(--primary-color);
+  backdrop-filter: blur(10px);
+  margin-left: -30px;
+}
+
+.logo {
+  height: 50px;
+  width:245px;
+  margin-left: 25px;
+}
+
+.toggle {
+  position: fixed;
+  top: 20px;
+  right: 40px; /* Positioning */
+  width: 60px;
+  height: 60px;
+  background: url(https://i.ibb.co/HrfVRcx/menu.png) center center no-repeat; /* Default icon */
+  background-size: 30px; /* Size of the icon */
+  cursor: pointer;
+  z-index: 100; /* Ensure it is above other elements */
+  transition: background 0.3s ease; /* Smooth transition */
+}
+
+.toggle.active {
+  background: url(https://i.ibb.co/rt3HybH/close.png) no-repeat center;
+  background-size: 25px;
+}
+
+.menu {
+  position: fixed;
+  top: 0;
+  right: -300px; /* Initially hidden off-screen */
+  width: 300px;
+  height: 100%;
+  background-color: var(--secondary-color);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: right 0.5s ease; /* Slide effect */
+  z-index: 10;
+}
+
+.menu.active {
+  right: 0; /* Slide in from the right */
+}
+
+.showcase {
+  position: relative; /* Adjusted to not shift when the menu opens */
+  width: 100%;
+  min-height: 100vh;
+  padding: 100px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: var(--secondary-color);
+  z-index: 1;
+}
+
+.showcase video {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0.4;
+}
+
+.overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: transparent;
+  mix-blend-mode: overlay;
+}
+
+.text {
+  position: relative;
+  z-index: 10;
+}
+
+.text h2 {
+  font-size: 5em;
+  font-weight: 700;
+  color: var(--text-color);
+  line-height: 1em;
+  text-transform: uppercase;
+}
+
+.text p {
+  font-size: 1.1em;
+  color: var(--text-color);
+  margin: 20px 0;
+  font-weight: 400;
+  max-width: 700px;
+}
+
+.text a {
+  display: inline-block;
+  font-size: 1em;
+  background: var(--primary-color);
+  padding: 10px 30px;
+  text-transform: uppercase;
+  text-decoration: none;
+  font-weight: 500;
+  margin-top: 10px;
+  color: var(--secondary-color);
+  letter-spacing: 2px;
+  transition: 0.2s;
+}
+
+.text a:hover {
+  letter-spacing: 6px;
+}
+
+.social {
+  position: absolute;
+  z-index: 10;
+  bottom: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.social li {
+  list-style: none;
+  margin-left: -50px;
+}
+
+.social li a {
+  display: inline-block;
+  margin-right: 80px;
+  filter: invert(1);
+  transform: scale(0.5);
+  transition: 0.5s;
+}
+
+.social li a:hover {
+  transform: scale(0.5) translateY(-15px);
+}
+
+.menu ul {
+  position: relative;
+  list-style: none;
+}
+
+.menu ul li a {
+  text-decoration: none;
+  font-size: 24px;
+  color: var(--menu-color);
+}
+
+.menu ul li a:hover {
+  color: var(--menuhover-color);
+}
+
+@media (max-width: 798px) {
+  .showcase,
+  .showcase header {
+    padding: 40px;
+  }
+  .text h2 {
+    font-size: 2.5em;
+    
+  }
+  .text{
+    margin-left: 3.5em;
+  }
+  .social {
+    margin-left: 60px;
+  }
+  .text br {
+    display: none;
+  }
+  .social li a {
+    margin-right: 70px;
+  }
+}
+
+@media (max-width: 430px) {
+  .logo{
+    width: 210px;
+    margin-left: -5px;
+  }
+  .toggle{
+    margin-right:-30px;
+  }
+  .text p {
+    font-size: 1.25em;
+    
+  }
+  .text{
+    margin-left: 20px;
+  }
+  .social {
+    margin-left: 30px;
+  }
+  .text br {
+    display: none;
+  }
+  .social li a {
+    margin-right: 70px;
+  }
+}
+
