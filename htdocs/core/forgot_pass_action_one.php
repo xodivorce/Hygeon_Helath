@@ -36,8 +36,8 @@ if (filter_var($email, FILTER_VALIDATE_EMAIL)) {
             $mail->isSMTP();
             $mail->Host       = $_ENV['SMTP_HOST']; // Set the SMTP server to send through
             $mail->SMTPAuth   = true;
-            $mail->Username   = $_ENV['SMTP_USERNAME']; // SMTP username
-            $mail->Password   = $_ENV['SMTP_PASSWORD']; // SMTP password
+            $mail->Username   = $_ENV['SMTP_USER']; // SMTP username
+            $mail->Password   = $_ENV['SMTP_PASS']; // SMTP password
             $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
             $mail->Port       = $_ENV['SMTP_PORT'];
 

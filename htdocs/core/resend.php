@@ -32,8 +32,8 @@ if (isset($_SESSION['email'])) {
             $mail->isSMTP();
             $mail->Host       = $_ENV['SMTP_HOST']; // SMTP server
             $mail->SMTPAuth   = true;
-            $mail->Username   = $_ENV['SMTP_USERNAME']; // SMTP username
-            $mail->Password   = $_ENV['SMTP_PASSWORD']; // SMTP password
+            $mail->Username   = $_ENV['SMTP_USER']; // SMTP username
+            $mail->Password   = $_ENV['SMTP_PASS']; // SMTP password
             $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
             $mail->Port       = $_ENV['SMTP_PORT'];
 
