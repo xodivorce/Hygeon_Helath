@@ -2,7 +2,6 @@
 // Start the session
 session_start();
 
-
 // Include necessary files
 require_once 'connection.php';
 require 'vendor/autoload.php';
