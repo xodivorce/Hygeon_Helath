@@ -42,7 +42,7 @@ if (filter_var($email, FILTER_VALIDATE_EMAIL)) {
             $mail->Port       = $_ENV['SMTP_PORT'];
 
             //Recipients
-            $mail->setFrom($_ENV['SMTP_USERNAME'], 'Hygeon Heath Care');
+            $mail->setFrom($_ENV['SMTP_USER'], 'Hygeon Heath Care');
             $mail->addAddress($email); // Add a recipient
 
             // Content
