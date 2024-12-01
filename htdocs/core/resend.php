@@ -37,14 +37,25 @@ if (isset($_SESSION['email'])) {
             $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
             $mail->Port       = $_ENV['SMTP_PORT'];
 
-            // Recipients
-            $mail->setFrom($_ENV['SMTP_USERNAME'], 'Mailer');
-            $mail->addAddress($email); // Recipient's email
+            //Recipients
+            $mail->setFrom($_ENV['SMTP_USERNAME'], 'Hygeon Heath Care');
+            $mail->addAddress($email); // Add a recipient
 
             // Content
             $mail->isHTML(true);
-            $mail->Subject = 'Your OTP Code';
-            $mail->Body    = 'Your OTP code is <b>' . $otp . '</b>';
+            $mail->Subject = 'Password Reset - Hygeon Heath Care';
+            $mail->Body    = 
+            'Hello User,<br><br>
+            Your one time password: <b>' . $otp . '</b>.<br><br>
+            
+            Your one-time password (OTP) is valid for a single session. If you refresh the page or exit the Next Step portal, you will need to regenerate a new OTP.<br><br>
+
+            If you did not request this OTP, please contact us immediately at www.xodivorce.in.<br><br>
+            
+            Regards,<br>
+            Hygeon Heath Care<br>
+            2024 © All rights reserved';
+
             $mail->AltBody = 'Your OTP code is ' . $otp;
 
             // Send the email
