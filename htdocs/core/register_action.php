@@ -12,6 +12,13 @@ if (isset($_POST['submit_btn'])) {
     $uName = $fName . " " . $lName;
     $uType = 1;
 
+    // Check if password is at least 8 characters long
+    if (strlen($password) < 8) {
+        $_SESSION['error'] = "Password must be at least 8 characters long.";
+        header('Location: ../register.php'); // Redirect to the register page
+        exit();
+    }
+
     // Check if email already exists
     $checkEmail = "SELECT * FROM user WHERE user_email = '$email'";
     $result = $conn->query($checkEmail);
@@ -22,9 +29,12 @@ if (isset($_POST['submit_btn'])) {
         header('Location: ../register.php'); // Redirect to the register page
         exit();
     } else {
-        // Insert the user data with plain text password (not recommended for production)
+        // Hash the password before storing it in the database
+        $hashedPassword = password_hash($password, PASSWORD_BCRYPT);
+
+        // Insert the user data with hashed password
         $sql = "INSERT INTO user (`user_name`, `user_email`, `user_pass`, `user_type`, `user_otp`) 
-                VALUES ('$uName', '$email', '$password', '$uType', NULL)";
+                VALUES ('$uName', '$email', '$hashedPassword', '$uType', NULL)";
 
         if ($conn->query($sql) === TRUE) {
             header('Location: ../login.php');
