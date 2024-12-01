@@ -23,7 +23,6 @@ body {
   justify-content: center;
   align-items: center;
   min-height: 100vh;
-  cursor: url('assets/cursor/cursor3.png'), auto;
   background-color: var(--secondary-color);
   background-position: center;
   background-size: cover;
@@ -57,42 +56,6 @@ button {
   height: 50px;
   width:245px;
   margin-left: 25px;
-}
-
-.toggle {
-  position: fixed;
-  top: 20px;
-  right: 40px; /* Positioning */
-  width: 60px;
-  height: 60px;
-  background: url(https://i.ibb.co/HrfVRcx/menu.png) center center no-repeat; /* Default icon */
-  background-size: 30px; /* Size of the icon */
-  cursor: pointer;
-  z-index: 100; /* Ensure it is above other elements */
-  transition: background 0.3s ease; /* Smooth transition */
-}
-
-.toggle.active {
-  background: url(https://i.ibb.co/rt3HybH/close.png) no-repeat center;
-  background-size: 25px;
-}
-
-.menu {
-  position: fixed;
-  top: 0;
-  right: -300px; /* Initially hidden off-screen */
-  width: 300px;
-  height: 100%;
-  background-color: var(--secondary-color);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  transition: right 0.5s ease; /* Slide effect */
-  z-index: 10;
-}
-
-.menu.active {
-  right: 0; /* Slide in from the right */
 }
 
 .showcase {
@@ -190,21 +153,6 @@ button {
 
 .social li a:hover {
   transform: scale(0.5) translateY(-15px);
-}
-
-.menu ul {
-  position: relative;
-  list-style: none;
-}
-
-.menu ul li a {
-  text-decoration: none;
-  font-size: 24px;
-  color: var(--menu-color);
-}
-
-.menu ul li a:hover {
-  color: var(--menuhover-color);
 }
 
 @media (max-width: 798px) {

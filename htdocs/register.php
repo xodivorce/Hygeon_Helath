@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -29,26 +30,25 @@
                 <h2>Create an account</h2>
                 <p>Already have an account? <a href="login.php">Log in</a></p>
                 
-                <form action="submit">
+                <form action="./core/register_action.php" method="post">
                     <div class="input-container">
-                        <input type="text" placeholder="First name" class="input-field">
-                        <input type="text" placeholder="Last name" class="input-field">
+                        <input type="text" placeholder="First name" class="input-field" name="f_name">
+                        <input type="text" placeholder="Last name" class="input-field" name="l_name">
                     </div>
-                    <input type="email" placeholder="Email" class="input-field full-width">
+                    <input type="email" placeholder="Email" class="input-field full-width" name="user_email">
                     
                     <!-- Password field with eye icon -->
                     <div class="input-container">
-                        <input type="password" placeholder="Enter your password" class="input-field full-width" id="password-field">
+                        <input type="password" placeholder="Enter your password" class="input-field full-width" id="password-field" name="user_pass">
                         <img src="assets/images/eye.svg" alt="Show Password" class="eye-icon" id="toggle-password">
                     </div>
                     
                     <div class="checkbox-container">
-                        <input type="checkbox" id="agree" class="custom-checkbox">
+                        <input type="checkbox" id="agree" class="custom-checkbox" name="user_agree" value="1">
                         <label for="agree">I agree to the <a href="#" class="terms-link">Terms & Conditions</a></label>
                     </div>
 
-
-                    <button type="submit" class="submit-button">Create account</button>
+                    <button type="submit" class="submit-button" name="submit_btn">Create account</button>
                 </form>
 
                 <div class="divider">Or register with</div>
