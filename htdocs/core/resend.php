@@ -49,7 +49,10 @@ if (isset($_SESSION['email'])) {
 
             // Send the email
             $mail->send();
-            echo 'A new OTP has been sent to your email address.';
+            $_SESSION['success_message'] = 'A new OTP has been sent to your email address.';
+            header('Location: ../forgot_pass_step_two.php'); // Redirect back to the confirmation page
+            exit;
+
         } catch (Exception $e) {
             echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
         }

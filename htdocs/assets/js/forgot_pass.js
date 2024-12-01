@@ -20,18 +20,7 @@ function changeBackgroundImage() {
 // Change image every 5 seconds
 setInterval(changeBackgroundImage, 5000);
 
-//Resend Buttton Alert
-function resendCode() {
-    var successMessage = document.getElementById('success-message');
-    successMessage.textContent = 'A new code has been sent to your email.';
-    successMessage.style.color = '#4CAF50'; // Set text color to green
-    successMessage.style.display = 'block'; // Show the message
 
-    // Hide the message after 5 seconds (5000ms)
-    setTimeout(function() {
-        successMessage.style.display = 'none';
-    }, 5000);
-}
 
 // Password visibility toggle logic
 const passwordField = document.getElementById('password-field');
