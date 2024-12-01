@@ -28,7 +28,7 @@
         <div class="form-container">
             <h2>Reset your password</h2>
             <p>Forgot your password? Please enter your email and we'll send you a 4-digit code.</p>
-            <form action="core/forgot_pass_action.php" method="POST">
+            <form action="core/forgot_pass_action_one.php" method="POST">
                 <input type="email" id="email" name="email" placeholder="Enter your email" class="input-field full-width" required>
                 <button type="submit" class="submit-button">Continue</button>
             </form>

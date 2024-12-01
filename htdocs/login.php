@@ -54,7 +54,7 @@ session_start();
                             <input type="checkbox" id="remember-me" class="custom-checkbox">
                             <label for="remember-me">Remember me for 30 days.</label>
                         </div>
-                        <a href="fogot_pass_step_one.php" class="forgot-password-link">Forgot password?</a>
+                        <a href="forgot_pass_step_one.php" class="forgot-password-link">Forgot password?</a>
                     </div>
                     
 

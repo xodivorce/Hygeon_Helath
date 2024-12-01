@@ -1,3 +1,8 @@
+<?php
+session_start(); // Start the session
+$email = isset($_SESSION['email']) ? $_SESSION['email'] : ''; // Retrieve the email from the session
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -8,7 +13,6 @@
     <link href="https://fonts.googleapis.com/css2?family=Mulish:ital,wght@0,200..1000;1,200..1000&family=Work+Sans:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
     <title>Enter Confirmation Code</title>
     <link rel="stylesheet" href="assets/css/forgot_pass.css">
-
 </head>
 <body>
 <div class="container">
@@ -28,25 +32,36 @@
     <div class="right-section">
         <div class="form-container">
             <h2>Enter Confirmation Code</h2>
-            <p>We sent a code to <strong id="userEmail"></strong></p>
-            <form id="codeForm" action="submit" method="post">
+            <p>We sent a code to <strong id="userEmail"><?php echo htmlspecialchars($email); ?></strong></p>
+
+            <?php if (isset($_SESSION['error_message'])): ?>
+                <div class="error-message" style="color: red; font-size: 13px; margin-top: -20px; margin-bottom: 3px;">
+                    <?php echo $_SESSION['error_message']; unset($_SESSION['error_message']); ?>
+                </div>
+            <?php endif; ?>
+
+            <form id="codeForm" action="./core/forgot_pass_action_two.php" method="post">
                 <!-- Input type set to 'tel' for numeric keyboard, with pattern for validation -->
-                 <input type="tel" pattern="[0-9]*" inputmode="numeric" placeholder="Enter 4-digit code" class="input-field full-width" maxlength="4" required>
-                 <button type="button" class="submit-button" onclick="location.href='forgot_pass_step_three.php'">Continue</button>
-                </form>
+                <input type="tel" name="otp" pattern="[0-9]*" inputmode="numeric" placeholder="Enter 4-digit code" class="input-field full-width" maxlength="4" required>
+                <button type="submit" class="submit-button">Continue</button>
+            </form>
 
             <div class="resend-code">
-                <p>Didn't receive the email? <a href="#" onclick="resendCode()">Click to resend</a></p>
+                <p>Didn't receive the email? <a href="core/resend.php">Click to resend</a></p>
             </div>
+
             <!-- Success message container -->
             <div id="success-message" class="success-message"></div>
         </div>
     </div>
 </div>
 
+<script>
+// Pass the PHP email value to JavaScript and set it in the HTML
+document.getElementById('userEmail').textContent = "<?php echo isset($email) ? htmlspecialchars($email) : ''; ?>";
+</script>
+
 <script src="assets/js/forgot_pass.js"></script>
-<script src="assets/js/email.js"></script>
+
 </body>
 </html>
-
-
