@@ -1,3 +1,6 @@
+<?php
+session_start();
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -28,15 +31,22 @@
             <div class="form-container">
                 <h2>Login to your account</h2>
                 <p>Don't have an account? <a href="register.php">Register</a></p>
-
-                <form action="submit">
-                    <input type="email" placeholder="Email" class="input-field full-width">
+                <form action="./core/login_action.php" method="post">
+                    <input type="email" placeholder="Email" class="input-field full-width" name="user_email" required>
 
                     <!-- Password field with eye icon -->
                     <div class="input-container">
-                        <input type="password" placeholder="Enter your password" class="input-field full-width" id="password-field">
+                        <input type="password" placeholder="Enter your password" class="input-field full-width" id="password-field" name="user_pass" required>
                         <img src="assets/images/eye.svg" alt="Show Password" class="eye-icon" id="toggle-password">
                     </div>
+                 <!-- Displaying error messages -->
+                <?php
+                    if (isset($_SESSION['error'])) {
+                        echo "<div style='color: red; font-size: 14px; margin-top: -20px; margin-bottom: 3px;'>" . $_SESSION['error'] . "</div>";
+                        unset($_SESSION['error']);
+                    }
+                ?>
+
 
                     <!-- Remember Me Checkbox, Forgot Password link, and Beta Notice -->
                     <div class="checkbox-forgot-container">
@@ -44,15 +54,16 @@
                             <input type="checkbox" id="remember-me" class="custom-checkbox">
                             <label for="remember-me">Remember me for 30 days.</label>
                         </div>
-                        <a href="./forgot_pass/fogot_pass_step_one.php" class="forgot-password-link">Forgot password?</a>
+                        <a href="fogot_pass_step_one.php" class="forgot-password-link">Forgot password?</a>
                     </div>
+                    
 
                     <!-- Beta Notice -->
                     <p class="beta-notice">
-                        This is a beta functionality. Please note that there are potential security concerns related to leaving your account logged in for long periods of time; especially when using an insecure, shared or public device.
+                        This is a beta functionality. Please note that there are potential security concerns related to leaving your account logged in for long periods of time; especially when using an insecure, shared, or public device.
                     </p>
 
-                    <button type="submit" class="submit-button">Login</button>
+                    <button type="submit" class="submit-button" name="login_btn">Login</button>
                 </form>
 
                 <div class="divider">Or login with</div>

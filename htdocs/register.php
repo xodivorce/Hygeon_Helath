@@ -1,3 +1,6 @@
+<?php
+session_start(); // Start the session to access error messages
+?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -42,6 +45,15 @@
                         <input type="password" placeholder="Enter your password" class="input-field full-width" id="password-field" name="user_pass">
                         <img src="assets/images/eye.svg" alt="Show Password" class="eye-icon" id="toggle-password">
                     </div>
+
+                <!-- Displaying error messages -->
+                <?php
+                    if (isset($_SESSION['error'])) {
+                        echo "<div style='color: red; font-size: 14px; margin-top: -24px;  margin-bottom: 7px;'>" . $_SESSION['error'] . "</div>";
+                        unset($_SESSION['error']); // Clear the error message after displaying it
+                    }
+                ?>
+
                     
                     <div class="checkbox-container">
                         <input type="checkbox" id="agree" class="custom-checkbox" name="user_agree" value="1">
@@ -50,7 +62,6 @@
 
                     <button type="submit" class="submit-button" name="submit_btn">Create account</button>
                 </form>
-
                 <div class="divider">Or register with</div>
 
                 <div class="social-login">
