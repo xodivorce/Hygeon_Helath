@@ -8,7 +8,7 @@ if (isset($_POST['submit_btn'])) {
     $fName = mysqli_real_escape_string($conn, $_POST['f_name']);
     $lName = mysqli_real_escape_string($conn, $_POST['l_name']);
     $email = mysqli_real_escape_string($conn, $_POST['user_email']);
-    $password = $_POST['user_pass']; // Plain text password
+    $password = mysqli_real_escape_string($conn, $_POST['user_pass']); // Plain text password
     $uName = $fName . " " . $lName;
     $uType = 1;
 
@@ -29,12 +29,9 @@ if (isset($_POST['submit_btn'])) {
         header('Location: ../register.php'); // Redirect to the register page
         exit();
     } else {
-        // Hash the password before storing it in the database
-        $hashedPassword = password_hash($password, PASSWORD_BCRYPT);
-
-        // Insert the user data with hashed password
+        // Insert the user data with plain text password
         $sql = "INSERT INTO user (`user_name`, `user_email`, `user_pass`, `user_type`, `user_otp`) 
-                VALUES ('$uName', '$email', '$hashedPassword', '$uType', NULL)";
+                VALUES ('$uName', '$email', '$password', '$uType', NULL)";
 
         if ($conn->query($sql) === TRUE) {
             header('Location: ../login.php');
