@@ -37,6 +37,16 @@ if (isset($_POST['submit_btn'])) {
                 VALUES ('$uName', '$email', '$hashedPassword', '$uType', NULL)";
 
         if ($conn->query($sql) === TRUE) {
+            // Get the user ID of the newly registered user
+            $userId = $conn->insert_id;
+
+            // Get the user's IP address
+            $userIp = $_SERVER['REMOTE_ADDR'];
+
+            // Insert the user's IP address into the user_ip table
+            $ipSql = "INSERT INTO user_ip (`user_id`, `ip_address`) VALUES ('$userId', '$userIp')";
+            $conn->query($ipSql);
+
             header('Location: ../login.php');
             exit();
         } else {

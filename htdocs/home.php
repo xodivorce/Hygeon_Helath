@@ -27,7 +27,7 @@ ini_set('display_errors', 1); // Turn on error reporting for troubleshooting
         <div class="text">
             <h2>Your Care, Our Schedule</h2>
             <p>Get clarity into your hormones and fertility with our comprehensive care. Access at-home testing, in-house experts and trusted partner clinics.<br> One life at a time, we make a difference.</p>
-            <a href="#">Schedule Now →</a>
+            <a href="core/router.php">Schedule Now →</a>
         </div>
         <ul class="social">
             <li><a href="https://www.facebook.com/xodivorce.1"><img src="https://i.ibb.co/x7P24fL/facebook.png" alt="Facebook"></a></li>
