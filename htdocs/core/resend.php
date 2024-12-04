@@ -1,74 +1,79 @@
 <?php
-include('connection.php');
-session_start(); // Start the session for storing error messages
-error_reporting(E_ALL);
-ini_set('display_errors', 1);
+// Start the session
+session_start();
 
-function getUserIpAddr() {
-    if (!empty($_SERVER['HTTP_CLIENT_IP'])) {
-        // IP from shared internet
-        $ip = $_SERVER['HTTP_CLIENT_IP'];
-    } elseif (!empty($_SERVER['HTTP_X_FORWARDED_FOR'])) {
-        // IP passed from proxy
-        $ip = $_SERVER['HTTP_X_FORWARDED_FOR'];
-    } else {
-        // IP address from remote address
-        $ip = $_SERVER['REMOTE_ADDR'];
-    }
-    return $ip;
-}
+// Include necessary files
+require_once 'connection.php';
+require 'vendor/autoload.php';
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\Exception;
+use Dotenv\Dotenv;
 
-if (isset($_POST['submit_btn'])) {
-    $fName = mysqli_real_escape_string($conn, $_POST['f_name']);
-    $lName = mysqli_real_escape_string($conn, $_POST['l_name']);
-    $email = mysqli_real_escape_string($conn, $_POST['user_email']);
-    $password = mysqli_real_escape_string($conn, $_POST['user_pass']); // Plain text password
-    $uName = $fName . " " . $lName;
-    $uType = 1;
+$dotenv = Dotenv::createImmutable(__DIR__ . '/../');
+$dotenv->load();
 
-    // Check if password is at least 8 characters long
-    if (strlen($password) < 8) {
-        $_SESSION['error'] = "Password must be at least 8 characters long.";
-        header('Location: ../register.php'); // Redirect to the register page
-        exit();
-    }
+// Check if the email is stored in the session
+if (isset($_SESSION['email'])) {
+    $email = $_SESSION['email'];
 
-    // Check if email already exists
-    $checkEmail = "SELECT * FROM user WHERE user_email = '$email'";
-    $result = $conn->query($checkEmail);
+    // Generate a new OTP
+    $otp = rand(1000, 9999);
 
-    if ($result->num_rows > 0) {
-        // Store the error message in the session
-        $_SESSION['error'] = "Email already exists. Please use a different email.";
-        header('Location: ../register.php'); // Redirect to the register page
-        exit();
-    } else {
-        // Hash the password before storing it
-        $hashedPassword = password_hash($password, PASSWORD_BCRYPT);
+    // Update the OTP in the database for the user
+    $sql = "UPDATE user SET user_otp = ? WHERE user_email = ?";
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param("is", $otp, $email);
 
-        // Insert the user data with hashed password
-        $sql = "INSERT INTO user (`user_name`, `user_email`, `user_pass`, `user_type`, `user_otp`) 
-                VALUES ('$uName', '$email', '$hashedPassword', '$uType', NULL)";
+    if ($stmt->execute()) {
+        // Send the OTP to the user's email
+        $mail = new PHPMailer(true);
+        try {
+            // Server settingsz
+            $mail->isSMTP();
+            $mail->Host       = $_ENV['SMTP_HOST']; // SMTP server
+            $mail->SMTPAuth   = true;
+            $mail->Username   = $_ENV['SMTP_USER']; // SMTP username
+            $mail->Password   = $_ENV['SMTP_PASS']; // SMTP password
+            $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
+            $mail->Port       = $_ENV['SMTP_PORT'];
 
-        if ($conn->query($sql) === TRUE) {
-            // Get the user ID of the newly registered user
-            $userId = $conn->insert_id;
+            //Recipients
+            $mail->setFrom($_ENV['SMTP_USER'], 'Hygeon Heath Care');
+            $mail->addAddress($email); // Add a recipient
 
-            // Get the user's IP address
-            $userIp = getUserIpAddr();
+            // Content
+            $mail->isHTML(true);
+            $mail->Subject = 'Password Reset - Hygeon Heath Care';
+            $mail->Body    = 
+            'Hello User,<br><br>
+            Your one time password: <b>' . $otp . '</b>.<br><br>
+            
+            Your one-time password (OTP) is valid for a single session. If you refresh the page or exit the Next Step portal, you will need to regenerate a new OTP.<br><br>
 
-            // Insert the user's IP address into the user_ip table
-            $ipSql = "INSERT INTO user_ip (`user_id`, `ip_address`) VALUES ('$userId', '$userIp')";
-            $conn->query($ipSql);
+            If you did not request this OTP, please contact us immediately at www.xodivorce.in.<br><br>
+            
+            Regards,<br>
+            Hygeon Heath Care<br>
+            2024 © All rights reserved';
 
-            header('Location: ../login.php');
-            exit();
-        } else {
-            $_SESSION['error'] = "Error: " . $sql . "<br>" . $conn->error;
-            header('Location: ../register.php');
-            exit();
+            $mail->AltBody = 'Your OTP code is ' . $otp;
+
+            // Send the email
+            $mail->send();
+            $_SESSION['success_message'] = 'A new OTP has been sent to your email address.';
+            header('Location: ../forgot_pass_step_two.php'); // Redirect back to the confirmation page
+            exit;
+
+        } catch (Exception $e) {
+            echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
         }
+    } else {
+        echo "Failed to update OTP in the database.";
     }
+
+    $stmt->close();
+} else {
+    echo "No email found in session.";
 }
 
 $conn->close();
