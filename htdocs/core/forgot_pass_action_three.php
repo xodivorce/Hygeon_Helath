@@ -15,7 +15,7 @@ if (isset($_POST['newPassword']) && isset($_POST['confirmPassword'])) {
 
     // Check if the new password is at least 8 characters long
     if (strlen($newPassword) < 8) {
-        $_SESSION['error_message'] = 'Password must be at least 8 characters.';
+        $_SESSION['error_message'] = 'Password must be at least 8 characters long.';
         header('Location: ../forgot_pass_step_three.php');
         exit();
     }
@@ -27,6 +27,9 @@ if (isset($_POST['newPassword']) && isset($_POST['confirmPassword'])) {
         exit();
     }
 
+    // Hash the new password before storing it
+    $hashedPassword = password_hash($newPassword, PASSWORD_BCRYPT);
+
     // Prepare the SQL query
     $sql = "UPDATE user SET user_pass = ? WHERE user_email = ?";
     $stmt = $conn->prepare($sql);
@@ -37,7 +40,7 @@ if (isset($_POST['newPassword']) && isset($_POST['confirmPassword'])) {
     }
 
     // Bind parameters and execute the query
-    $stmt->bind_param("ss", $newPassword, $email);
+    $stmt->bind_param("ss", $hashedPassword, $email);
 
     if ($stmt->execute()) {
         header('Location: ../password_reset_success.php');

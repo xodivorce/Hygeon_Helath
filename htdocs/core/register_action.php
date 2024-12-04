@@ -29,9 +29,12 @@ if (isset($_POST['submit_btn'])) {
         header('Location: ../register.php'); // Redirect to the register page
         exit();
     } else {
-        // Insert the user data with plain text password
+        // Hash the password before storing it
+        $hashedPassword = password_hash($password, PASSWORD_BCRYPT);
+
+        // Insert the user data with hashed password
         $sql = "INSERT INTO user (`user_name`, `user_email`, `user_pass`, `user_type`, `user_otp`) 
-                VALUES ('$uName', '$email', '$password', '$uType', NULL)";
+                VALUES ('$uName', '$email', '$hashedPassword', '$uType', NULL)";
 
         if ($conn->query($sql) === TRUE) {
             header('Location: ../login.php');
