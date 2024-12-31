@@ -16,13 +16,14 @@ ini_set('display_errors', 1); // Turn on error reporting for troubleshooting
 <body>
     <header>
         <img src="assets/images/hygeon_heath.svg" alt="Hygeon_heath Logo" class="logo">
-        <div class="toggle"></div>
+        <div class="toggle" style="margin-top: -10px;">
+        </div>
     </header>
 
     <?php include 'assets/menu.php'; ?> <!-- Including menu.php -->
 
     <section class="showcase">
-        <video src="assets/videous/purple.mp4" muted loop autoplay playsinline preload="auto"></video>
+        <video src="assets/videous/purple.mp4" muted loop autoplay playsinline preload="auto" playbackRate="0.01"></video>
         <div class="overlay"></div>
         <div class="text">
             <h2>Your Care, Our Schedule</h2>
@@ -30,9 +31,9 @@ ini_set('display_errors', 1); // Turn on error reporting for troubleshooting
             <a href="core/router.php">Schedule Now →</a>
         </div>
         <ul class="social">
-            <li><a href="https://www.facebook.com/xodivorce.1"><img src="https://i.ibb.co/x7P24fL/facebook.png" alt="Facebook"></a></li>
-            <li><a href="https://twitter.com/xodivorce1"><img src="https://i.ibb.co/Wnxq2Nq/twitter.png" alt="Twitter"></a></li>
-            <li><a href="https://www.instagram.com/xodivorce"><img src="https://i.ibb.co/ySwtH4B/instagram.png" alt="Instagram" style="margin-left: -15px;"></a></li>
+            <li><a href="https://www.facebook.com/xodivorce.1"><img src="./assets/images/facebook.png" alt="Facebook" style="height:50px; width:50px; opacity: 0.8;"></a></li>
+            <li><a href="https://twitter.com/xodivorce1"><img src="./assets/images/x.png" alt="Twitter"style="margin-left: -5px;height:50px; width:50px; opacity: 0.8;"></a></li>
+            <li><a href="https://www.instagram.com/xodivorce"><img src="./assets/images/instagram.png" alt="Instagram" style="margin-left: -10px; height:50px; width:50px; opacity: 0.8;"></a></li>
         </ul>
     </section>
 

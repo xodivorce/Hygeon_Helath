@@ -16,7 +16,7 @@
     right: 40px; /* Positioning */
     width: 60px;
     height: 60px;
-    background: url(https://i.ibb.co/HrfVRcx/menu.png) center center no-repeat; /* Default icon */
+    background: url("../images/hamburger.svg") center center no-repeat; /* Default icon */
     background-size: 30px; /* Size of the icon */
     cursor: pointer;
     z-index: 100; /* Ensure it is above other elements */
@@ -24,7 +24,7 @@
   }
   
   .toggle.active {
-    background: url(https://i.ibb.co/rt3HybH/close.png) no-repeat center;
+    background: url("../images/x.svg") no-repeat center;
     background-size: 25px;
   }
   
