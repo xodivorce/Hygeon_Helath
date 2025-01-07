@@ -1,8 +1,8 @@
 # [Hygeon Health - Healthcare Management System](https://en.wikipedia.org/wiki/Health_management_system)
 
-### Welcome to the Official Healthcare Management System - deveoped by ([@xodivorce](https://instagram.com/xodivorce)) ✨
+### Welcome to Hygeon Healthcare Management System - deveoped by ([@xodivorce](https://instagram.com/xodivorce)) ✨
 [![status](https://img.shields.io/badge/status-active-brightgreen.svg?style=flat)](https://github.com/xodivorce/xodivorce-portfolio/)
-[![version](https://img.shields.io/badge/version-v4.4.9-yellow.svg?style=flat)](https://github.com/xodivorce/xodivorce-portfolio/)
+[![version](https://img.shields.io/badge/version-v4.4.10-yellow.svg?style=flat)](https://github.com/xodivorce/xodivorce-portfolio/)
 [![PRs](https://img.shields.io/badge/PRs-welcome-blue.svg?style=flat)](https://github.com/xodivorce/xodivorce-portfolio/)
 <br></br>
 
@@ -12,6 +12,8 @@ Here’s what fuels this site:
 
 ![HTML5](https://img.shields.io/badge/html5-%23E34F26.svg?style=for-the-badge&logo=html5&logoColor=white)
 ![CSS3](https://img.shields.io/badge/CSS-239120?&style=for-the-badge&logo=css3&logoColor=white)
+![TAILWINDCSS](https://img.shields.io/badge/tailwindcss-%2338B2AC.svg?style=for-the-badge&logo=tailwind-css&logoColor=white)
+![NODE.JS](https://img.shields.io/badge/node.js-6DA55F?style=for-the-badge&logo=node.js&logoColor=white)
 ![JavaScript](https://img.shields.io/badge/javascript-%23323330.svg?style=for-the-badge&logo=javascript&logoColor=%23F7DF1E)
 ![PHP](https://img.shields.io/badge/php-%23777BB4.svg?style=for-the-badge&logo=php&logoColor=white)
 ![MySQL](https://img.shields.io/badge/mysql-%2300f.svg?style=for-the-badge&logo=mysql&logoColor=white)
@@ -39,25 +41,33 @@ Want to jump in and sprinkle some magic on this project? Follow these steps:
      open -a XAMPP
      # Start Apache and MySQL in XAMPP Control Panel
      ```
+4. **Start Up TAILWIND CSS**:
+   - Launch your terminal and run the following commands:
+     ```bash
+     # Install dependencies using NPM (Node Package Manager)
+     npm install
+     # Start Tailwind CSS build process
+     npm run build
+     ```
 
-4. **View Locally**:
+5. **View Locally**:
    - Open your browser and head to:
      ```bash
      http://localhost/Hygeon_Helath/htdocs/index.php
      ```
 
-5. **Pro Tip**: Use a Self-Signed SSL for local development to keep everything smooth and secure with HTTPS. 🔐
+6. **Pro Tip**: Use a Self-Signed SSL for local development to keep everything smooth and secure with HTTPS. 🔐
 
-6. **Create a Feature Branch**:
+7. **Create a Feature Branch**:
    - Before diving in, create a new branch for your feature or fix:
      ```bash
      git checkout -b cool-new-feature
      ```
 
-7. **Work Your Magic**:
+8. **Work Your Magic**:
    - Make your changes, test them, and get ready for a pull request.
 
-8. **Commit and Push**:
+9. **Commit and Push**:
    - Once you’re happy, commit and push your changes:
      ```bash
      git add .
@@ -65,10 +75,10 @@ Want to jump in and sprinkle some magic on this project? Follow these steps:
      git push origin cool-new-feature
      ```
 
-9. **Open a Pull Request**:
+10. **Open a Pull Request**:
    - Go to the main repository and create a pull request. Let us know what you’ve done and why it’s awesome!
 
-10. **Celebrate Your Contribution** 🎉:
+11. **Celebrate Your Contribution** 🎉:
     - Enjoy the glory of your awesome contribution! We appreciate all your help and ideas.
 
 🚀 **Got Ideas or Spotted a Bug?**  
