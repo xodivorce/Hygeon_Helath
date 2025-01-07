@@ -22,10 +22,11 @@ $email = $_POST['email'];
 if (filter_var($email, FILTER_VALIDATE_EMAIL)) {
     $otp = rand(1000, 9999);
 
-    // Optimize database query with prepared statement
-    $sql = "UPDATE user SET user_otp = ? WHERE user_email = ?";
-    $stmt = $conn->prepare($sql);
-    $stmt->bind_param("is", $otp, $email);
+    // Optimize database query with PDO
+    $sql = "UPDATE user SET user_otp = :otp WHERE user_email = :email";
+    $stmt = $pdo->prepare($sql);
+    $stmt->bindParam(':otp', $otp, PDO::PARAM_INT);
+    $stmt->bindParam(':email', $email, PDO::PARAM_STR);
 
     if ($stmt->execute()) {
         // Send OTP email
@@ -58,15 +59,15 @@ if (filter_var($email, FILTER_VALIDATE_EMAIL)) {
             
             Regards,<br>
             Hygeon Heath Care<br>
-            2024 © All rights reserved';
+            2025 © All rights reserved';
 
             $mail->AltBody = 'Your OTP code is ' . $otp;
 
             $mail->send();
-                // Redirect to ../fogot_pass_step_two.php
-                session_start(); // Start the session
-                $_SESSION['email'] = $email; // Store the email in the session
-                header('Location: ../forgot_pass_step_two.php'); // Redirect to the next pag
+            // Redirect to ../forgot_pass_step_two.php
+            session_start(); // Start the session
+            $_SESSION['email'] = $email; // Store the email in the session
+            header('Location: ../forgot_pass_step_two.php'); // Redirect to the next page
             exit; // Ensure no further script execution after redirection
         } catch (Exception $e) {
             echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
@@ -74,11 +75,7 @@ if (filter_var($email, FILTER_VALIDATE_EMAIL)) {
     } else {
         echo "Failed to update OTP in the database.";
     }
-
-    $stmt->close();
 } else {
     echo "Invalid email address.";
 }
-
-$conn->close();
 ?>

@@ -1,7 +1,8 @@
 <?php
 session_start();
-require_once 'connection.php';
+require_once 'connection.php'; // Ensure this is your PDO connection file
 
+// Check if the email is stored in the session
 if (!isset($_SESSION['email'])) {
     header('Location: login.php');
     exit();
@@ -30,19 +31,16 @@ if (isset($_POST['newPassword']) && isset($_POST['confirmPassword'])) {
     // Hash the new password before storing it
     $hashedPassword = password_hash($newPassword, PASSWORD_BCRYPT);
 
-    // Prepare the SQL query
-    $sql = "UPDATE user SET user_pass = ? WHERE user_email = ?";
-    $stmt = $conn->prepare($sql);
-
-    // Check if the prepare statement was successful
-    if (!$stmt) {
-        die('Error preparing statement: ' . $conn->error);
-    }
+    // Prepare the SQL query using PDO
+    $sql = "UPDATE user SET user_pass = :password WHERE user_email = :email";
+    $stmt = $pdo->prepare($sql); // Use the $pdo object for prepared statements
 
     // Bind parameters and execute the query
-    $stmt->bind_param("ss", $hashedPassword, $email);
+    $stmt->bindParam(':password', $hashedPassword, PDO::PARAM_STR);
+    $stmt->bindParam(':email', $email, PDO::PARAM_STR);
 
     if ($stmt->execute()) {
+        // Redirect to success page
         header('Location: ../password_reset_success.php');
         exit();
     } else {
@@ -50,12 +48,7 @@ if (isset($_POST['newPassword']) && isset($_POST['confirmPassword'])) {
         header('Location: ../forgot_pass_step_three.php');
         exit();
     }
-
-    $stmt->close();
 } else {
     header('Location: ../forgot_pass_step_three.php');
     exit();
 }
-
-$conn->close();
-?>

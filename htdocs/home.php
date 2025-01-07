@@ -23,7 +23,7 @@ ini_set('display_errors', 1); // Turn on error reporting for troubleshooting
     <?php include 'assets/menu.php'; ?> <!-- Including menu.php -->
 
     <section class="showcase">
-        <video src="assets/videous/purple.mp4" muted loop autoplay playsinline preload="auto" playbackRate="0.01"></video>
+        <video src="assets/videos/purple.mp4" muted loop autoplay playsinline preload="auto" playbackRate="0.01"></video>
         <div class="overlay"></div>
         <div class="text">
             <h2>Your Care, Our Schedule</h2>

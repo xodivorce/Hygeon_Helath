@@ -10,7 +10,7 @@ if (isset($_POST['submit_btn'])) {
     $email = mysqli_real_escape_string($conn, $_POST['user_email']);
     $password = mysqli_real_escape_string($conn, $_POST['user_pass']); // Plain text password
     $uName = $fName . " " . $lName;
-    $uType = 1;
+    $uType = 3;
 
     // Check if password is at least 8 characters long
     if (strlen($password) < 8) {

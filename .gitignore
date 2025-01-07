@@ -1,3 +1,4 @@
 htdocs/.env
 Trial
 .DS_Store
+node_modules/

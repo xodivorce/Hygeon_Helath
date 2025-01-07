@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Dec 01, 2024 at 09:50 PM
+-- Generation Time: Jan 06, 2025 at 07:13 PM
 -- Server version: 10.4.28-MariaDB
--- PHP Version: 8.0.28
+-- PHP Version: 8.2.4
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -34,8 +34,38 @@ CREATE TABLE `user` (
   `user_pass` varchar(255) NOT NULL,
   `user_type` int(11) NOT NULL,
   `user_otp` int(4) DEFAULT NULL,
-  `user_login_time` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
+  `uid_created_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `user`
+--
+
+INSERT INTO `user` (`user_id`, `user_name`, `user_email`, `user_pass`, `user_type`, `user_otp`, `uid_created_at`) VALUES
+(24, 'Prasid Mandal', 'prasidmandal79@gmail.com', '$2y$10$V/O2H92vn4O3C1lrbgtygucZ.ZTZbfvIAMx2xHeIsIQryZwLE90ei', 1, 9018, '2025-01-06 17:36:50');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `user_ip`
+--
+
+CREATE TABLE `user_ip` (
+  `id` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `ip_address` varchar(45) NOT NULL,
+  `uid_login_at` timestamp NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `user_ip`
+--
+
+INSERT INTO `user_ip` (`id`, `user_id`, `ip_address`, `uid_login_at`) VALUES
+(1, 24, '::1', '2025-01-06 17:25:35'),
+(2, 24, '::1', '2025-01-06 17:26:28'),
+(3, 24, '::1', '2025-01-06 17:27:14'),
+(4, 24, '::1', '2025-01-06 17:37:20');
 
 --
 -- Indexes for dumped tables
@@ -49,6 +79,13 @@ ALTER TABLE `user`
   ADD KEY `user_email` (`user_email`);
 
 --
+-- Indexes for table `user_ip`
+--
+ALTER TABLE `user_ip`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `user_id` (`user_id`);
+
+--
 -- AUTO_INCREMENT for dumped tables
 --
 
@@ -56,7 +93,23 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
+
+--
+-- AUTO_INCREMENT for table `user_ip`
+--
+ALTER TABLE `user_ip`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
+-- Constraints for dumped tables
+--
+
+--
+-- Constraints for table `user_ip`
+--
+ALTER TABLE `user_ip`
+  ADD CONSTRAINT `user_ip_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`) ON DELETE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

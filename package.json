@@ -1,0 +1,17 @@
+{
+  "name": "hygeon_helath",
+  "version": "1.0.0",
+  "description": "### Welcome to the Official Healthcare Management System - deveoped by ([@xodivorce](https://instagram.com/xodivorce)) ✨ [![status](https://img.shields.io/badge/status-active-brightgreen.svg?style=flat)](https://github.com/xodivorce/xodivorce-portfolio/) [![version](https://img.shields.io/badge/version-v4.4.8-yellow.svg?style=flat)](https://github.com/xodivorce/xodivorce-portfolio/) [![PRs](https://img.shields.io/badge/PRs-welcome-blue.svg?style=flat)](https://github.com/xodivorce/xodivorce-portfolio/) <br></br>",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "autoprefixer": "^10.4.20",
+    "postcss": "^8.4.49",
+    "tailwindcss": "^3.4.17"
+  }
+}

@@ -3,7 +3,7 @@
 session_start();
 
 // Include necessary files
-require_once 'connection.php';
+require_once 'connection.php';  // Make sure connection.php contains PDO connection
 require 'vendor/autoload.php';
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
@@ -19,16 +19,17 @@ if (isset($_SESSION['email'])) {
     // Generate a new OTP
     $otp = rand(1000, 9999);
 
-    // Update the OTP in the database for the user
-    $sql = "UPDATE user SET user_otp = ? WHERE user_email = ?";
-    $stmt = $conn->prepare($sql);
-    $stmt->bind_param("is", $otp, $email);
+    // Update the OTP in the database for the user using PDO
+    $sql = "UPDATE user SET user_otp = :otp WHERE user_email = :email";
+    $stmt = $pdo->prepare($sql);  // Use $pdo here for prepared statements
+    $stmt->bindParam(':otp', $otp, PDO::PARAM_INT);
+    $stmt->bindParam(':email', $email, PDO::PARAM_STR);
 
     if ($stmt->execute()) {
         // Send the OTP to the user's email
         $mail = new PHPMailer(true);
         try {
-            // Server settingsz
+            // Server settings
             $mail->isSMTP();
             $mail->Host       = $_ENV['SMTP_HOST']; // SMTP server
             $mail->SMTPAuth   = true;
@@ -37,7 +38,7 @@ if (isset($_SESSION['email'])) {
             $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
             $mail->Port       = $_ENV['SMTP_PORT'];
 
-            //Recipients
+            // Recipients
             $mail->setFrom($_ENV['SMTP_USER'], 'Hygeon Heath Care');
             $mail->addAddress($email); // Add a recipient
 
@@ -54,7 +55,7 @@ if (isset($_SESSION['email'])) {
             
             Regards,<br>
             Hygeon Heath Care<br>
-            2024 © All rights reserved';
+            2025 © All rights reserved';
 
             $mail->AltBody = 'Your OTP code is ' . $otp;
 
@@ -76,5 +77,5 @@ if (isset($_SESSION['email'])) {
     echo "No email found in session.";
 }
 
-$conn->close();
+$pdo = null;  // Close the PDO connection
 ?>
