@@ -54,22 +54,26 @@ ini_set('display_errors', 1);
         <!-- Sidebar Menu -->
         <aside class="w-1/4 bg-gray-800 text-white p-6 h-screen">
             <ul class="space-y-4">
-                <?php if (isset($_SESSION['user_type']) && $_SESSION['user_type'] == 1): ?>
-                <li><a href="?section=doctors" class="block px-4 py-2 hover:bg-blue-600">Manage Doctors</a></li>
-                <li><a href="?section=patients" class="block px-4 py-2 hover:bg-blue-600">Manage Patients</a></li>
-                <li><a href="?section=appointments" class="block px-4 py-2 hover:bg-blue-600">Manage Appointments</a></li>
-                <li><a href="?section=admin_management" class="block px-4 py-2 hover:bg-blue-600">Admin Management</a></li>
+                <!-- Admin Menu -->
+                <?php if ($_SESSION['user_type'] == 1): ?>
+                    <li><a href="?section=doctors" class="block px-4 py-2 hover:bg-blue-600">Manage Doctors</a></li>
+                    <li><a href="?section=patients" class="block px-4 py-2 hover:bg-blue-600">Manage Patients</a></li>
+                    <li><a href="?section=admin_manage_appointments" class="block px-4 py-2 hover:bg-blue-600">Manage Appointments</a></li>
+                    <li><a href="?section=account" class="block px-4 py-2 hover:bg-blue-600">Account</a></li>
                 <?php endif; ?>
 
-                <?php if (isset($_SESSION['user_type']) && $_SESSION['user_type'] == 2): ?>
-                <li><a href="?section=patients" class="block px-4 py-2 hover:bg-blue-600">Manage Patients</a></li>
-                <li><a href="?section=doctor_appointments" class="block px-4 py-2 hover:bg-blue-600">View Appointments</a></li>
-                <li><a href="?section=update_status" class="block px-4 py-2 hover:bg-blue-600">Update Appointment Status</a></li>
+                <!-- Doctor Menu -->
+                <?php if ($_SESSION['user_type'] == 2): ?>
+                    <li><a href="?section=patients" class="block px-4 py-2 hover:bg-blue-600">Manage Patients</a></li> 
+                    <li><a href="?section=doctor_appointments" class="block px-4 py-2 hover:bg-blue-600">View Appointments</a></li>
+                    <li><a href="?section=account" class="block px-4 py-2 hover:bg-blue-600">Account</a></li>
                 <?php endif; ?>
 
-                <?php if (isset($_SESSION['user_type']) && $_SESSION['user_type'] == 3): ?>
-                <li><a href="?section=my_appointments" class="block px-4 py-2 hover:bg-blue-600">My Appointments</a></li>
-                <li><a href="?section=book_appointment" class="block px-4 py-2 hover:bg-blue-600">Book New Appointment</a></li>
+                <!-- Patient Menu -->
+                <?php if ($_SESSION['user_type'] == 3): ?>
+                    <li><a href="?section=my_appointments" class="block px-4 py-2 hover:bg-blue-600">My Appointments</a></li>
+                    <li><a href="?section=book_appointment" class="block px-4 py-2 hover:bg-blue-600">Book New Appointment</a></li>
+                    <li><a href="?section=account" class="block px-4 py-2 hover:bg-blue-600">Account</a></li>
                 <?php endif; ?>
             </ul>
         </aside>
@@ -80,25 +84,34 @@ ini_set('display_errors', 1);
             $section = $_GET['section'] ?? 'dashboard';
 
             if (isset($_SESSION['user_type'])) {
-                if ($_SESSION['user_type'] == 1 && $section == 'doctors') {
-                    include 'core/admin_manage_doctors.php';
-                } elseif ($_SESSION['user_type'] == 1 && $section == 'patients') {
-                    include 'core/admin_manage_patients.php';
-                } elseif ($_SESSION['user_type'] == 1 && $section == 'appointments') {
-                    include 'core/admin_manage_appointments.php';
-                } elseif ($_SESSION['user_type'] == 1 && $section == 'admin_management') {
-                    include 'core/admin_management.php';
-                } elseif ($_SESSION['user_type'] == 2 && $section == 'doctor_appointments') {
-                    include 'core/doctor_appointments.php';
-                } elseif ($_SESSION['user_type'] == 2 && $section == 'update_status') {
-                    include 'core/update_status.php';
-                } elseif ($_SESSION['user_type'] == 3 && $section == 'my_appointments') {
-                    include 'core/patient_appointments.php';
-                } elseif ($_SESSION['user_type'] == 3 && $section == 'book_appointment') {
-                    include 'core/book_appointment.php';
-                } else {
-                    echo '<h2 class="text-xl font-bold">Welcome to the Dashboard</h2>';
-                    echo '<p>Select an option from the sidebar to proceed.</p>';
+                switch ($section) {
+                    case 'doctors':
+                        if ($_SESSION['user_type'] == 1) include 'core/admin_manage_doctors.php';
+                        break;
+                    case 'patients':
+                        if ($_SESSION['user_type'] == 1 || $_SESSION['user_type'] == 2) include 'core/admin_manage_patients.php';
+                        break;
+                    case 'admin_manage_appointments':
+                        if ($_SESSION['user_type'] == 1) include 'core/admin_manage_appointments.php';
+                        break;
+                    case 'doctor_appointments':
+                        if ($_SESSION['user_type'] == 2) include 'core/doctor_appointments.php';
+                        break;
+                    case 'update_status':
+                        if ($_SESSION['user_type'] == 2) include 'core/update_status.php';
+                        break;
+                    case 'my_appointments':
+                        if ($_SESSION['user_type'] == 3) include 'core/patient_appointments.php';
+                        break;
+                    case 'book_appointment':
+                        if ($_SESSION['user_type'] == 3) include 'core/book_appointment.php';
+                        break;
+                    case 'account':
+                        include 'core/account.php';
+                        break;
+                    default:
+                        echo '<h2 class="text-xl font-bold">Welcome to the Dashboard</h2>';
+                        echo '<p>Select an option from the sidebar to proceed.</p>';
                 }
             } else {
                 echo '<p style="color:red;">Error: Session not initialized. Please log in.</p>';

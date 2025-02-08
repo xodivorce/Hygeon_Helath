@@ -1,61 +1,61 @@
 <?php
-include('connection.php');
-session_start(); // Start the session for storing error messages
+include('../core/connection.php'); // Ensure correct path
+session_start();
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
 
+if (!isset($pdo)) {
+    die("Database connection not established.");
+}
+
 if (isset($_POST['submit_btn'])) {
-    $fName = mysqli_real_escape_string($conn, $_POST['f_name']);
-    $lName = mysqli_real_escape_string($conn, $_POST['l_name']);
-    $email = mysqli_real_escape_string($conn, $_POST['user_email']);
-    $password = mysqli_real_escape_string($conn, $_POST['user_pass']); // Plain text password
+    // Get form data
+    $fName = $_POST['f_name'];
+    $lName = $_POST['l_name'];
+    $email = $_POST['user_email'];
+    $password = $_POST['user_pass'];
     $uName = $fName . " " . $lName;
     $uType = 3;
 
-    // Check if password is at least 8 characters long
+    // Check password length
     if (strlen($password) < 8) {
         $_SESSION['error'] = "Password must be at least 8 characters long.";
-        header('Location: ../register.php'); // Redirect to the register page
+        header('Location: ../register.php');
         exit();
     }
 
-    // Check if email already exists
-    $checkEmail = "SELECT * FROM user WHERE user_email = '$email'";
-    $result = $conn->query($checkEmail);
+    // Check if email already exists using PDO
+    $stmt = $pdo->prepare("SELECT * FROM user WHERE user_email = :email");
+    $stmt->execute(['email' => $email]);
 
-    if ($result->num_rows > 0) {
-        // Store the error message in the session
+    if ($stmt->rowCount() > 0) {
         $_SESSION['error'] = "Email already exists. Please use a different email.";
-        header('Location: ../register.php'); // Redirect to the register page
+        header('Location: ../register.php');
         exit();
     } else {
         // Hash the password before storing it
         $hashedPassword = password_hash($password, PASSWORD_BCRYPT);
 
-        // Insert the user data with hashed password
-        $sql = "INSERT INTO user (`user_name`, `user_email`, `user_pass`, `user_type`, `user_otp`) 
-                VALUES ('$uName', '$email', '$hashedPassword', '$uType', NULL)";
+        // Insert user data using prepared statement
+        $stmt = $pdo->prepare("INSERT INTO user (user_name, user_email, user_pass, user_type, user_otp) 
+                               VALUES (:user_name, :user_email, :user_pass, :user_type, NULL)");
+        $stmt->execute([
+            'user_name' => $uName,
+            'user_email' => $email,
+            'user_pass' => $hashedPassword,
+            'user_type' => $uType
+        ]);
 
-        if ($conn->query($sql) === TRUE) {
-            // Get the user ID of the newly registered user
-            $userId = $conn->insert_id;
+        // Get last inserted user ID
+        $userId = $pdo->lastInsertId();
+        $userIp = $_SERVER['REMOTE_ADDR'];
 
-            // Get the user's IP address
-            $userIp = $_SERVER['REMOTE_ADDR'];
+        // Insert user IP into `user_ip` table
+        $stmt = $pdo->prepare("INSERT INTO user_ip (user_id, ip_address) VALUES (:user_id, :ip_address)");
+        $stmt->execute(['user_id' => $userId, 'ip_address' => $userIp]);
 
-            // Insert the user's IP address into the user_ip table
-            $ipSql = "INSERT INTO user_ip (`user_id`, `ip_address`) VALUES ('$userId', '$userIp')";
-            $conn->query($ipSql);
-
-            header('Location: ../login.php');
-            exit();
-        } else {
-            $_SESSION['error'] = "Error: " . $sql . "<br>" . $conn->error;
-            header('Location: ../register.php');
-            exit();
-        }
+        header('Location: ../login.php');
+        exit();
     }
 }
-
-$conn->close();
 ?>
